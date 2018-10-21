@@ -8,6 +8,9 @@ public class WaypointHUD : MonoBehaviour {
     private Camera m_mainCamera;
 
     [SerializeField]
+    public GameObject Rover;
+
+    [SerializeField]
     public float[] ForwardDistances;
 
     [SerializeField]
@@ -24,11 +27,13 @@ public class WaypointHUD : MonoBehaviour {
             ForwardDistances[i++] = forwardDotDistance;
             // Check if way point is visible, output > 0; else it's not visible 
             if (forwardDotDistance >= 0) {
-                float distance = Vector3.Distance(transform.position, wp.transform.position);
+                var tmp = wp.transform.position;
+                tmp.y = Rover.transform.position.y;
+                float distance = Vector3.Distance(Rover.transform.position, tmp);
                 Vector3 wpVectorView = m_mainCamera.WorldToScreenPoint(wp.transform.position);
                 WTF[i-1] = wpVectorView;
                 GUI.color = Color.black;
-                GUI.Label(new Rect(wpVectorView.x, wpVectorView.y, 100, 100), distance.ToString("F2") + "m");
+                GUI.Label(new Rect(wpVectorView.x, 50, 100, 100), distance.ToString("F2") + "m");
             }
         }
     }
