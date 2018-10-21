@@ -32,7 +32,7 @@ public class WaypointHUD : MonoBehaviour {
                 float distance = Vector3.Distance(Rover.transform.position, tmp);
                 Vector3 wpVectorView = m_mainCamera.WorldToScreenPoint(wp.transform.position);
                 WTF[i-1] = wpVectorView;
-                GUI.color = Color.black;
+                GUI.color = Color.white;
                 GUI.Label(new Rect(wpVectorView.x, 50, 100, 100), distance.ToString("F2") + "m");
             }
         }
