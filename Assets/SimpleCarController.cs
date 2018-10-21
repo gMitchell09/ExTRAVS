@@ -22,7 +22,7 @@ public class SimpleCarController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown("Jump")) {
+        if (Input.GetKeyDown("space")) {
             Quaternion rot = transform.rotation;
             rot.eulerAngles.Set(rot.x, rot.y, 0);
             transform.rotation = rot;
