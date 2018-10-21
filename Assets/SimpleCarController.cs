@@ -7,6 +7,14 @@ public class SimpleCarController : MonoBehaviour {
     public float maxMotorTorque; // maximum torque the motor can apply to wheel
     public float maxSteeringAngle; // maximum steer angle the wheel can have
 
+    private Vector3 m_lastPos;
+    private HealthManager m_healthManager;
+
+    void Start() {
+        m_lastPos = transform.position;
+        m_healthManager = FindObjectOfType<HealthManager>();
+    }
+
     public void FixedUpdate() {
         float motor = maxMotorTorque * Input.GetAxis("VerticalKey");
         float steering = maxSteeringAngle * Input.GetAxis("HorizontalKey");
@@ -27,6 +35,9 @@ public class SimpleCarController : MonoBehaviour {
             rot.eulerAngles.Set(rot.x, rot.y, 0);
             transform.rotation = rot;
         }
+
+        m_healthManager.AddDistanceTravelled(Mathf.Abs((transform.position - m_lastPos).magnitude));
+        m_lastPos = transform.position;
     }
 }
 
